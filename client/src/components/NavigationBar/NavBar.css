@@ -5,12 +5,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    
 }
 .navbar-container{
     width: 90%;
     height: 90%;
     /* background-color: rgb(192, 125, 255); */
     display: flex;
+    z-index: 3;
     justify-content: space-between;
 }
 .navbar-logo-img{
@@ -38,7 +41,7 @@
     align-items: center;
     justify-content: center;
 }
-.navbar-links__content{
+.navbar-links__content, .navbar-links-responsive__content{
     height: 98%;
     width: 100%;
     /* background-color: yellowgreen; */
@@ -68,6 +71,38 @@
 }
 .active{
     background-color: #fabc5160;
-    border-radius: 30px;
-    
+    border-radius: 30px;  
+}
+.navbar-links__hamburger_logo{
+    width: 70px;
+    display: none;
+
+}
+.navbar-links-responsive__content{
+    position:absolute;
+    width: 100%;
+    height: 110px;
+    padding: 20px;
+    flex-direction: column;
+    z-index: -1;
+    background-color: rgb(255, 255, 255);
+    top:-150px;
+}
+
+@media only screen and (max-width:829px){
+    .navbar-links__content{
+        display: none;
+    }
+    .navbar-links__hamburger_logo{
+        display: flex;
+    }
+    .navbar-links{
+        justify-content: space-between;
+    }
+    .navbar-links-responsive__content{
+        
+        z-index: 2;
+        top:110px;
+    }
+
 }
