@@ -1,7 +1,7 @@
 import React,{useState} from "react";
-import "./AddTask.css";
+import "./EditTask.css";
 import { CirclePicker } from 'react-color';
-const AddTask = () => {
+const EditTask = () => {
 
     const [title,setTitle]  = useState("");
     const [description,setDescription] = useState("");
@@ -84,4 +84,4 @@ const AddTask = () => {
   );
 };
 
-export default AddTask;
+export default EditTask;

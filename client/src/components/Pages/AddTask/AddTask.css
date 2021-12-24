@@ -10,8 +10,3 @@
     height: 500px;
     margin: 30px;
 }
-.buttons{
-    width: 60%;
-    display: flex;
-    justify-content: space-between;
-}
