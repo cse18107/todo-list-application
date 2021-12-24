@@ -16,6 +16,15 @@ router.post("/add",async(req,res)=>{
     }catch(error){
         res.status(422).json(error);
     }
+});
+
+router.get("/gettask",async(req,res)=>{
+    try{
+        const task = await tasks.find();
+        res.status(201).send(task);
+    }catch(error){
+        res.status(422).json(error);
+    }
 })
 
 module.exports = router;
