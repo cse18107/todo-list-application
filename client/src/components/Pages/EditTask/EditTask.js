@@ -1,5 +1,6 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import "./EditTask.css";
+import {useParams,useNavigate} from 'react-router-dom';
 import { CirclePicker } from 'react-color';
 const EditTask = () => {
 
@@ -8,8 +9,29 @@ const EditTask = () => {
     const [date,setDate] = useState("");
     const [task,setTask] = useState({});
     const [color,setColor] = useState("");
+  const navigate = useNavigate();
+    const {id} = useParams("");
+    console.log(id);
 
+    const getTask = async() => {
+      try{
+        const res =await fetch(`http://localhost:8003/gettask/${id}`,{
+          method:"GET",
+          headers:{
+            "Content-Type":"application/json",
+            Accept:"application/json"
+          }
+          
+        });
 
+        const data= await res.json();
+        console.log(data);
+        setTask(data);
+      }catch(error){
+        console.log(error);
+      }
+    }
+    useEffect(()=>{getTask()},[]);
     const setTitleHandler=(event)=>{
         setTitle(event.target.value);
     }
@@ -22,9 +44,23 @@ const EditTask = () => {
         setDescription(event.target.value);
     }
 
-    const setTaskHandler = () =>{
-        setTask({title,description,date,color});
-        
+    const setTaskHandler = async() =>{
+        //setTask({title,description,date,color});
+      const res= await fetch(`http://localhost:8003/updatetask/${id}`,{
+        method:"PATCH",
+        headers:{
+          "Content-Type":"application/json",
+        },
+        body:JSON.stringify({
+          title,
+          description,
+          date,
+          color
+        })
+      });
+        const data = await res.json();
+        console.log(data);
+        navigate("/");
     }
 
     const showColor=(color)=>{
@@ -42,6 +78,7 @@ const EditTask = () => {
             <input
               type="text"
               class="form-control"
+              value={task.title}
               id="inputEmail4"
               onChange={setTitleHandler}
               placeholder="Any title of your task"
@@ -55,6 +92,7 @@ const EditTask = () => {
               type="text"
               class="form-control"
               id="inputEmail4"
+              value={task.description}
               onChange={setDescriptionHandler}
               placeholder="Description of your task"
             />
@@ -67,6 +105,7 @@ const EditTask = () => {
               type="text"
               class="form-control"
               id="inputEmail4"
+              value={task.date}
               onChange={setDateHandler}
               placeholder="DD/MM/YYY"
             />

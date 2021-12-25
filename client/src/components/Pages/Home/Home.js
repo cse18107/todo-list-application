@@ -41,7 +41,7 @@ const Home = () => {
                       <div className="buttons">
                         <Link
                           type="button"
-                          to={`/edit-task/:${value.id}`}
+                          to={`/edit-task/${value._id}`}
                           class="btn btn-success"
                         >
                           Edit
